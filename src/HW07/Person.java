@@ -1,14 +1,15 @@
-package ru.yaxus.inojava.attestations.att01;
+package HW07;
+
+import HW07.Product.ProductInterface;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Objects;
 
 public class Person {
 
     private String name;
-    private int cash;
-    private final ArrayList<Product> cart = new ArrayList<Product>();
+    private double cash;
+    private final ArrayList<ProductInterface> cart = new ArrayList<>();
 
     public Person(String name, int cache) throws PersonException {
         this.setName(name);
@@ -29,7 +30,7 @@ public class Person {
         this.cash = cash;
     }
 
-    public void addProduct(Product product) throws PersonException {
+    public void addProduct(ProductInterface product) throws PersonException {
         if (this.cash - product.getPrice() < 0){
             String msg = String.format("%s не может позволить себе %s"
                     , this.name
@@ -43,13 +44,14 @@ public class Person {
     public String getCurrentState(){
         int cntProducts = this.cart.size();
         if (cntProducts == 0)
-            return this.name + " - Ничего не куплено";
-        String[] prod_names = new String[cntProducts];
+            return this.name + " (остаток: " + cash + ") - Ничего не куплено";
+        String[] prodNames = new String[cntProducts];
         int i = 0;
-        for (Product product : this.cart){
-            prod_names[i++] = product.getName();
+        for (ProductInterface product : this.cart){
+//            prodNames[i++] = product.getName();
+            prodNames[i++] = product.toString();
         }
-        return this.name + " - " + String.join(", ", prod_names);
+        return this.name + " (остаток: " + cash + ")\n - " + String.join(", \n - ", prodNames);
     }
 
     @Override

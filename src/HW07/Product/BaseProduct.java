@@ -1,17 +1,18 @@
-package ru.yaxus.inojava.attestations.att01;
+package HW07.Product;
 
 import java.util.Objects;
 
-public class Product {
-    private String name;
-    private int price;
+public class BaseProduct implements ProductInterface {
 
-    public Product(String name, int price) throws ProductException {
-        this.setName(name);
-        this.setPrice(price);
+    protected String name;
+    protected double price;
+
+    BaseProduct(String name, double price){
+        this._setName(name);
+        this._setPrice(price);
     }
 
-    public void setName(String name) throws IllegalArgumentException {
+    protected void _setName(String name) throws IllegalArgumentException {
         if (name.isEmpty()){
             throw new IllegalArgumentException("Название продукта не может быть пустой строкой");
         }
@@ -22,20 +23,21 @@ public class Product {
         return this.name;
     }
 
-    public void setPrice(int price) throws IllegalArgumentException {
+    protected void _setPrice(double price) throws IllegalArgumentException {
         if (price < 0){
             throw new IllegalArgumentException("Стоимость продукта не может быть отрицательной, попытка установить: " + price);
         }
         this.price = price;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return this.price;
     }
 
+
     @Override
     public String toString() {
-        return "Product{" +
+        return "BaseProduct{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
                 '}';
@@ -53,10 +55,5 @@ public class Product {
     public int hashCode() {
         return Objects.hash(name, price);
     }
-}
 
-class ProductException extends Exception{
-    public ProductException(String message) {
-        super(message);
-    }
 }
