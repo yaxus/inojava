@@ -1,6 +1,4 @@
-package HW11;
-
-import java.util.stream.Stream;
+package HW11Addition.model;
 
 public class Car {
     private final String number;
